@@ -1,0 +1,7 @@
+# requirements_minimal.txt
+torch
+transformers
+fastapi
+uvicorn
+regex
+numpy

@@ -1,0 +1,21 @@
+# deployment.yml
+free_options:
+  - huggingface_spaces:
+      memory: 16GB
+      storage: 50GB
+      always_on: false
+      
+  - google_colab:
+      runtime: GPU
+      duration: 12 hours
+      restart_needed: true
+      
+  - replit:
+      memory: 512MB
+      always_on: false
+      domain: your-project.replit.dev
+      
+  - pythonanywhere:
+      free_tier: 512MB RAM
+      web_app: yes
+      cron_jobs: yes

@@ -1,0 +1,26 @@
+# 1. Clone and setup
+git clone https://github.com/yourusername/neuro-mimetic-llm.git
+cd neuro-mimetic-llm
+pip install -r requirements_minimal.txt
+
+# 2. Train English simulator (week 1)
+python train_english_simulator.py \
+  --model gpt2-small \
+  --data wikipedia_en_1gb \
+  --context_start 512 \
+  --context_end 4096 \
+  --epochs 3
+
+# 3. Test Arabic tokenizer (isolated)
+cd tokenizer
+python test_tokenizer_api.py  # Runs on port 8001
+# Test: curl -X POST http://localhost:8001/tokenize -d '{"text": "اللغة العربية جميلة"}'
+
+# 4. Run main API server
+cd ../api
+uvicorn server:app --reload --port 8000
+
+# 5. Test API
+curl -X POST http://localhost:8000/generate \
+  -H "Content-Type: application/json" \
+  -d '{"prompt": "Explain Arabic morphology", "use_slow_attention": true}'
